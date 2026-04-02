@@ -1,4 +1,4 @@
-MAIN = main.py
+MAIN = src/app.py
 
 .PHONY: dev
 
