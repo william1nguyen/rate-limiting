@@ -2,12 +2,14 @@ from fastapi import FastAPI, Request, HTTPException
 
 from rate_limiter.middleware import RateLimit
 from rate_limiter.strategies.token_bucket import TokenBucket
+from rate_limiter.strategies.sliding_window_log import SlidingWindowLog
 from rate_limiter.decorator import rate_limit
 from rate_limiter.keys import by_ip_and_route
 
 app = FastAPI()
 
-limiter = RateLimit(factory=lambda key: TokenBucket(10, 2, 10.0))
+# limiter = RateLimit(factory=lambda key: TokenBucket(10, 2, 10.0))
+limiter = RateLimit(factory=lambda key: SlidingWindowLog(60.0, 10))
 
 
 @app.middleware("http")

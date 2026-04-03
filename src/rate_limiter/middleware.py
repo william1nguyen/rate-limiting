@@ -22,5 +22,5 @@ class RateLimit:
     def get_remaining(self, key: str) -> int:
         return self.get_bucket(key).get_remaining()
 
-    def get_reset_time(self, key: str) -> int:
+    def get_reset_time(self, key: str) -> float:
         return self.get_bucket(key).get_reset_time()
